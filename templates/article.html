@@ -28,17 +28,17 @@
     <article>
         <div class="row">
             <div class="col-lg-9">
-                <header class="page-header">
+                <header id="page-header">
                     <h1>
                         <a href="{{ SITEURL }}/{{ article.url }}"
                            rel="bookmark"
                            title="Permalink to {{ article.title|striptags }}">
                             {{ article.title }}
                         </a>
-                        <small>
-                        {% include "include/article_info.html" %}
-                        </small>
                     </h1>
+                    <div id="article-info">
+                        {% include "include/article_info.html" %}
+                    </div>
                 </header>
             </div>
         </div>
