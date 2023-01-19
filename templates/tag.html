@@ -1,4 +1,6 @@
 {% extends "include/article_list.html" %}
+{% set body_class = 'tag tag-' ~ tag %}
+
 {% block title %}{{ tag }} - {{ SITENAME }}{% endblock %}
 {% block meta %}
     <meta name="keywords" content="{{ tag }}" />

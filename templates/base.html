@@ -82,7 +82,7 @@
         <link href="{{ SITEURL }}/{{ CUSTOM_CSS }}" rel="stylesheet" />
     {% endif %}
 </head>
-<body data-spy="scroll" data-target="#scrollspy">
+<body class="{{ body_class }}" data-spy="scroll" data-target="#scrollspy">
     <div id="wrapper">
         <!-- Sidebar -->
         {% include "include/sidebar.html" %}

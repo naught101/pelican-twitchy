@@ -1,4 +1,6 @@
 {% extends "include/article_list.html" %}
+{% set body_class = 'category category-' ~ category %}
+
 {% block title %}{{ category }} - {{ SITENAME }}{% endblock %}
 {% block meta %}
     <meta name="author" content="{{ AUTHOR }}" />
