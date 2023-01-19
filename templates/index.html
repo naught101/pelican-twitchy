@@ -35,10 +35,14 @@
     {% if articles %}
         {% for article in (all_articles if all_articles else articles)[:RECENT_POST_COUNT] %}
             <article>
-                <h2>
-                    <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
-                    {% include "include/article_info.html" %}
-                </h2>
+                <div class="article-header">
+                    <h2>
+                        <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                    </h2>
+                    <div class='article-info'>
+                        {% include "include/article_info.html" %}
+                    </div>
+                </div>
                 <div class="summary">
                     {{ article.summary }}
                 </div>
