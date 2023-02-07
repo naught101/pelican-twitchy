@@ -19,7 +19,7 @@
 {#                                                                          #}
 {# Optional:                                                                #}
 {#   br_after_icon: if true put a line break after the license icon         #}
-{#   attr_markup: if true create markup for fulll attribution               #}
+{#   attr_markup: if true create markup for full attribution                #}
 {#   attr_props: if attr_markup, a dict with title, name, and url keys      #}
 {#               specifying how under which title, to which creator, and    #}
 {#               to which URL to attribute the work                         #}
@@ -38,27 +38,41 @@
   {% if cc_name %}
     {% set cc_name = cc_name|lower|replace("cc-","") %}
   {% else %}
-    {% set cc_name = "by" %}
-    {% set cc_title_suffix = "" %}
+    {% set cc_name = "" %}
     {% if (not commercial) or (commercial|lower == "no") %}
       {% set cc_name = cc_name ~ "-nc" %}
-      {% set cc_title_suffix = "-NonCommercial" %}
     {% endif %}
     {% if derivatives|lower == "no" %}
       {% set cc_name = cc_name ~ "-nd" %}
-      {% set cc_title_suffix = cc_title_suffix ~ "-NoDerivatives" %}
     {% elif derivatives|lower == "sharealike" %}
       {% set cc_name = cc_name ~ "-sa" %}
-      {% set cc_title_suffix = cc_title_suffix ~ "-ShareAlike" %}
     {% endif %}
   {% endif %}
-  {% set cc_title, cc_uri, cc_icon = ("Creative Commons Attribution 4.0 InternationalCCSUFFIX License","http://creativecommons.org/licenses/CCNAME/4.0/","//i.creativecommons.org/l/CCNAME/4.0/80x15.png") %}
-  <a rel="license" href="{{ cc_uri|replace('CCNAME',cc_name) }}"><img alt="Creative Commons License" style="border-width:0" src="{{ cc_icon|replace('CCNAME',cc_name) }}" /></a>
+  {% set cc_title_suffix = "" %}
+  {% if "nc" in cc_name %}
+    {% set cc_title_suffix = cc_title_suffix ~ "-NonCommercial" %}
+  {% endif %}
+  {% if "nd" in cc_name %}
+    {% set cc_title_suffix = cc_title_suffix ~ "-NoDerivatives" %}
+  {% elif "sa" in cc_name %}
+    {% set cc_title_suffix = cc_title_suffix ~ "-ShareAlike" %}
+  {% endif %}
+  {% set cc_title = "Creative Commons AttributionCCSUFFIX 4.0 International License" %}
+  {% set cc_uri = "https://creativecommons.org/licenses/CCNAME/4.0/" %}
+  {% set cc_icon = "https://licensebuttons.net/l/CCNAME/4.0/80x15.png" %}
+  <a rel="license" href="{{ cc_uri|replace('CCNAME',cc_name) }}">
+      <img alt="Creative Commons License" style="border-width:0" src="{{ cc_icon|replace('CCNAME',cc_name) }}" />
+  </a>
   {% if br_after_img %}<br/>{% endif %}
   {% if attr_markup %}
-    &quot;<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">{{ attr_props['title'] }}</span>&quot; by <a xmlns:cc="http://creativecommons.org/ns#" href="{{ attr_props['url'] }}" property="cc:attributionName" rel="cc:attributionURL">{{ attr_props['name'] }}</a> is
+    &quot;<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">{{ attr_props['title'] }}</span>&quot;
+    by
+    <a xmlns:cc="http://creativecommons.org/ns#" href="{{ attr_props['url'] }}" property="cc:attributionName" rel="cc:attributionURL">
+        {{ attr_props['name'] }}</a> is
   {% else %}
     Content
   {% endif %}
-  licensed under a <a rel="license" href="{{ cc_uri|replace('CCNAME',cc_name) }}">{{ cc_title|replace('CCSUFFIX',cc_title_suffix) }}</a>, except where indicated otherwise.
+  licensed under the <a rel="license" href="{{ cc_uri|replace('CCNAME',cc_name) }}">
+      {{ cc_title|replace('CCSUFFIX',cc_title_suffix) }}
+  </a>, except where indicated.
 {% endmacro %}
