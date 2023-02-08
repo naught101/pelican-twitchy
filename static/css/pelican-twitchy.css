@@ -412,3 +412,24 @@ ul.sidebar_submenu>li>a>i.padding-small{
         display: inline;
     }
 }
+
+/* neighbors plugin support */
+#article-navigation span,
+#article-navigation-category span {
+    color: #444;
+}
+
+#article-navigation span.prev a::before,
+#article-navigation-category span.prev a::before {
+    content: "  « prev:";
+}
+
+#article-navigation span.next a::before,
+#article-navigation-category span.next a::before {
+    content: "next:";
+}
+
+#article-navigation span.next a::after,
+#article-navigation-category span.next a::after {
+    content: "»";
+}

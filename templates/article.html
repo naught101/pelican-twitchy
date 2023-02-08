@@ -48,7 +48,50 @@
                 <div class="entry-content">
                     {{ article.content }}
                 </div>
-                <footer class="text-right">
+                <footer class="text-center">
+                    <!-- neighbors plugin support -->
+                    {% if (article.prev_article_in_category or article.next_article_in_category) %}
+                    <div id="article-navigation-category">
+                        Articles in
+                        <span class="category">
+                            <i class="fa fa-folder-open padding-small"></i><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></span>:
+                        {% if article.prev_article_in_category %}
+                        <span class="prev">
+                            <a href="{{ SITEURL }}/{{ article.prev_article_in_category.url}}">
+                                {{ article.prev_article_in_category.title }}
+                            </a>
+                        </span>
+                        {% endif %}
+                        &middot;
+                        {% if article.next_article_in_category %}
+                        <span class="next">
+                            <a href="{{ SITEURL }}/{{ article.next_article_in_category.url}}">
+                                {{ article.next_article_in_category.title }}
+                            </a>
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% if (article.prev_article or article.next_article) %}
+                    <div id="article-navigation">
+                        All Articles:
+                        {% if article.prev_article %}
+                        <span class="prev">
+                            <a href="{{ SITEURL }}/{{ article.prev_article.url}}">
+                                {{ article.prev_article.title }}
+                            </a>
+                        </span>
+                        {% endif %}
+                        &middot;
+                        {% if article.next_article %}
+                        <span class="next">
+                            <a href="{{ SITEURL }}/{{ article.next_article.url}}">
+                                {{ article.next_article.title }}
+                            </a>
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </footer>
                 {% include 'include/comments.html' %}
             </div>
